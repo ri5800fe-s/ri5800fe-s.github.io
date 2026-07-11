@@ -28,7 +28,6 @@
       padding: 40px 20px;
     }
 
-    /* Updated header layout using flexbox to align photo and text */
     header {
       display: flex;
       justify-content: space-between;
@@ -46,8 +45,8 @@
     .profile-photo {
       width: 110px;
       height: 110px;
-      border-radius: 50%; /* Makes it a clean circle */
-      object-fit: cover; /* Prevents stretching */
+      border-radius: 50%;
+      object-fit: cover;
       border: 1px solid var(--border-color);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
@@ -113,7 +112,6 @@
       text-decoration: underline;
     }
 
-    /* Stack header layouts cleanly on smaller mobile screens */
     @media (max-width: 480px) {
       header {
         flex-direction: column-reverse;
@@ -162,6 +160,13 @@
       <h3>Precision parton-shower simulations for the LHC (PPSS 2026)</h3>
       <p>Contributing to the ERC project STAPLE by analyzing high-precision Monte Carlo event simulations for the LHC. Utilizing C++ and Python to compare quantum-corrected theoretical predictions with real collider data to test fundamental physics.</p>
       <a href="https://ppss.ifj.edu.pl/" target="_blank">View PPSS website →</a>
+    </div>
+
+    <!-- NEW COURSE BLOCK -->
+    <div class="project-card">
+      <h3>Coursework: FYSN33 Projects</h3>
+      <p>Applied Computational Physics and Machine Learning portfolio at Lund University. Features implementations of hydrodynamics solvers, deep learning models for high-energy physics, and statistical simulations.</p>
+      <a href="fysn33.html">Explore Course Projects →</a>
     </div>
   </section>
 
