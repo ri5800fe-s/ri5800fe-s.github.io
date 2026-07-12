@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FYSN33 Projects | Ricardo Fernandes</title>
   
-  <!-- Properly configured MathJax for Inline and Block LaTeX -->
   <script>
     window.MathJax = {
       tex: {
@@ -50,11 +49,28 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    /* Fixed Toggle Switch placement matching index.html */
+    .theme-toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: background 0.2s, border 0.2s, color 0.2s;
+      z-index: 1000;
+    }
+
     header {
       margin-bottom: 30px;
       border-bottom: 2px solid var(--border-color);
       padding-bottom: 20px;
-      position: relative;
     }
 
     .back-link {
@@ -73,23 +89,6 @@
       font-size: 1.1rem;
       color: var(--muted-text);
       margin: 0;
-    }
-
-    /* Balanced theme toggle matching the layout design */
-    .theme-toggle-btn {
-      position: absolute;
-      top: 0px;
-      right: 20px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 6px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 500;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      transition: background 0.2s, border 0.2s;
     }
 
     .project-card {
@@ -139,12 +138,9 @@
 
     @media (max-width: 480px) {
       .theme-toggle-btn {
-        position: relative;
-        top: 0;
-        right: 0;
+        position: static;
+        margin: 0 auto 20px auto;
         display: block;
-        margin-bottom: 15px;
-        width: fit-content;
       }
     }
 
@@ -158,9 +154,10 @@
 </head>
 <body>
 
+  <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+
   <header>
     <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
-    <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">&; Dark Mode</button>
     <h1>Coursework Portfolio</h1>
     <p class="subtitle">FYSN33 — Applied Computational Physics and Machine Learning</p>
   </header>
@@ -172,14 +169,14 @@
       <p>Implementation of a fluid dynamics solver utilizing Smoothed Particle Hydrodynamics (SPH) to simulate compressible flow profiles and shocks across transient boundary layers.</p>
       
       <video class="project-video" controls muted preload="metadata">
-        <source src="project1_simulation.mp4" type="video/mp4">
+        <source src="FYSN33 - Applied Computational Physics and Machine Learning/Project 1 - Differential-equations-in-astrophysics/collapse_dt2.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
 
     <div class="project-card">
       <span class="project-num">Project 2</span>
-      <h3>Neural-Network Tagger for Hadronic \(V \rightarrow q\bar{q}\) Jets</h3>
+      <h3>Neural-Network Tagger for Hadronic $V \rightarrow q\bar{q}$ Jets</h3>
       <p>Constructed an optimized deep learning classifier designed to identify and separate highly boosted hadronic vector boson decays from background QCD noise.</p>
     </div>
 
@@ -189,7 +186,7 @@
       <p>Using statistical sampling methods and custom Monte Carlo Markov Chain models to simulate thermodynamic macrostates, effectively reconstructing Hooke's elastic behaviors from microscopic entropy properties.</p>
       
       <video class="project-video" controls muted preload="metadata">
-        <source src="project3_simulation.mp4" type="video/mp4">
+        <source src="FYSN33 - Applied Computational Physics and Machine Learning/Project 3 - Entropic spring: rediscover Hooke’s law with Monte Carlo/rubberband-visualization.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
@@ -199,7 +196,6 @@
     <p>&copy; 2026 Ricardo Fernandes. FYSN33 Project Log.</p>
   </footer>
 
-  <!-- SCRIPT TRACKS STATE SYNC ACROSS BOTH PAGES -->
   <script>
     const toggleBtn = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('theme');
@@ -207,10 +203,10 @@
     
     if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
       document.documentElement.setAttribute('data-theme', 'dark');
-      toggleBtn.innerHTML = '&; Light Mode';
+      toggleBtn.innerHTML = '☀️ Light Mode';
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
-      toggleBtn.innerHTML = '&; Dark Mode';
+      toggleBtn.innerHTML = '🌙 Dark Mode';
     }
 
     toggleBtn.addEventListener('click', () => {
@@ -219,9 +215,9 @@
       
       if (currentTheme === 'light') {
         newTheme = 'dark';
-        toggleBtn.innerHTML = '&; Light Mode';
+        toggleBtn.innerHTML = '☀️ Light Mode';
       } else {
-        toggleBtn.innerHTML = '&; Dark Mode';
+        toggleBtn.innerHTML = '🌙 Dark Mode';
       }
       
       document.documentElement.setAttribute('data-theme', newTheme);
