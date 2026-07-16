@@ -3,17 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>FYSN33 Projects | Ricardo Fernandes</title>
-  
+
+  <!-- MathJax configuration -->
   <script>
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      startup: {
+        typeset: true
       }
     };
   </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/dist/tex-mml-chtml.js"></script>
+
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
 
   <style>
     /* CSS Variables for Light Mode */
@@ -22,6 +32,7 @@
       --text-color: #212529;
       --heading-color: #111111;
       --accent-color: #0066cc;
+      --accent-hover: #004f9e;
       --card-bg: #ffffff;
       --border-color: #e9ecef;
       --muted-text: #6c757d;
@@ -33,13 +44,15 @@
       --text-color: #e0e0e0;
       --heading-color: #ffffff;
       --accent-color: #4da6ff;
+      --accent-hover: #80bfff;
       --card-bg: #1e1e1e;
       --border-color: #2d2d2d;
       --muted-text: #a0aec0;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
       line-height: 1.7;
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -49,7 +62,6 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Fixed Toggle Switch placement matching index.html */
     .theme-toggle-btn {
       position: fixed;
       top: 20px;
@@ -62,8 +74,11 @@
       cursor: pointer;
       font-size: 0.85rem;
       font-weight: 500;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: background 0.2s, border 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s;
       z-index: 1000;
     }
 
@@ -81,7 +96,7 @@
 
     h1 {
       font-size: 2.2rem;
-      margin: 0 0 10px 0;
+      margin: 0 0 10px;
       color: var(--heading-color);
     }
 
@@ -97,14 +112,25 @@
       border-radius: 8px;
       padding: 24px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-      transition: background-color 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
-    .project-card h3 {
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    .project-card h2 {
       margin-top: 0;
       margin-bottom: 10px;
       color: var(--heading-color);
+      font-size: 1.3rem;
+      line-height: 1.4;
     }
 
     .project-num {
@@ -118,13 +144,52 @@
     }
 
     .project-video {
+      display: block;
       width: 100%;
       max-width: 100%;
       height: auto;
       margin-top: 15px;
       border-radius: 6px;
       border: 1px solid var(--border-color);
-      background-color: #000;
+      background-color: #000000;
+    }
+
+    .project-actions {
+      margin-top: 20px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background-color: var(--accent-color);
+      color: #ffffff;
+      padding: 9px 15px;
+      border: 1px solid var(--accent-color);
+      border-radius: 6px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.4;
+      text-decoration: none;
+      transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .project-link:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+      color: #ffffff;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .project-link:focus-visible,
+    .theme-toggle-btn:focus-visible,
+    .back-link:focus-visible {
+      outline: 3px solid var(--accent-color);
+      outline-offset: 3px;
     }
 
     a {
@@ -136,60 +201,144 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 480px) {
-      .theme-toggle-btn {
-        position: static;
-        margin: 0 auto 20px auto;
-        display: block;
-      }
-    }
-
     footer {
       margin-top: 60px;
       font-size: 0.9rem;
       color: var(--muted-text);
       text-align: center;
     }
+
+    @media (max-width: 480px) {
+      body {
+        padding-top: 25px;
+      }
+
+      .theme-toggle-btn {
+        position: static;
+        display: block;
+        margin: 0 0 20px auto;
+      }
+
+      .project-card {
+        padding: 20px;
+      }
+
+      .project-link {
+        box-sizing: border-box;
+        justify-content: center;
+        width: 100%;
+      }
+    }
   </style>
 </head>
-<body>
 
-  <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+<body>
+  <button
+    class="theme-toggle-btn"
+    id="themeToggle"
+    type="button"
+    aria-label="Switch to dark mode"
+    aria-pressed="false">
+    🌙 Dark Mode
+  </button>
 
   <header>
     <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+
     <h1>Coursework Portfolio</h1>
-    <p class="subtitle">FYSN33 — Applied Computational Physics and Machine Learning</p>
+
+    <p class="subtitle">
+      FYSN33 — Applied Computational Physics and Machine Learning
+    </p>
   </header>
 
   <main>
-    <div class="project-card">
+    <article class="project-card">
       <span class="project-num">Project 1</span>
-      <h3>Solving the Sod Shock Tube Problem with SPH</h3>
-      <p>Implementation of a fluid dynamics solver utilizing Smoothed Particle Hydrodynamics (SPH) to simulate compressible flow profiles and shocks across transient boundary layers.</p>
-      
+
+      <h2>Solving the Sod Shock Tube Problem with SPH</h2>
+
+      <p>
+        Implementation of a fluid dynamics solver utilizing Smoothed Particle
+        Hydrodynamics (SPH) to simulate compressible flow profiles and shocks
+        across transient boundary layers.
+      </p>
+
       <video class="project-video" controls muted preload="metadata">
-        <source src="FYSN33 - Applied Computational Physics and Machine Learning/Project 1 - Differential-equations-in-astrophysics/collapse_dt2.mp4" type="video/mp4">
+        <source
+          src="FYSN33 - Applied Computational Physics and Machine Learning/Project 1 - Differential-equations-in-astrophysics/collapse_dt2.mp4"
+          type="video/mp4">
         Your browser does not support the video tag.
       </video>
-    </div>
 
-    <div class="project-card">
+      <div class="project-actions">
+        <a
+          class="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%201%20-%20Differential-equations-in-astrophysics"
+          href="project-1.html"
+          aria-label="View the full Sod Shock Tube project">
+          View Full Project <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="project-card">
       <span class="project-num">Project 2</span>
-      <h3>Neural-Network Tagger for Hadronic $V \rightarrow q\bar{q}$ Jets</h3>
-      <p>Constructed an optimized deep learning classifier designed to identify and separate highly boosted hadronic vector boson decays from background QCD noise.</p>
-    </div>
 
-    <div class="project-card">
+      <!--
+        Using \( ... \) instead of dollar signs avoids conflicts with other
+        scripts and ensures MathJax identifies this as inline mathematics.
+      -->
+      <h2>
+        Neural-Network Tagger for Hadronic
+        \(V \rightarrow q\bar{q}\) Jets
+      </h2>
+
+      <p>
+        Constructed an optimized deep learning classifier designed to identify
+        and separate highly boosted hadronic vector boson decays from
+        background QCD noise.
+      </p>
+
+      <div class="project-actions">
+        <a
+          class="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%202%20-%20Neural-network-tagger-clean"
+          href="project-2.html"
+          aria-label="View the full neural-network jet tagger project">
+          View Full Project <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="project-card">
       <span class="project-num">Project 3</span>
-      <h3>Entropic Spring – Rediscovering Hooke’s Law with Monte Carlo</h3>
-      <p>Using statistical sampling methods and custom Monte Carlo Markov Chain models to simulate thermodynamic macrostates, effectively reconstructing Hooke's elastic behaviors from microscopic entropy properties.</p>
-      
+
+      <h2>
+        Entropic Spring – Rediscovering Hooke’s Law with Monte Carlo
+      </h2>
+
+      <p>
+        Using statistical sampling methods and custom Monte Carlo Markov Chain
+        models to simulate thermodynamic macrostates, effectively
+        reconstructing Hooke's elastic behaviors from microscopic entropy
+        properties.
+      </p>
+
       <video class="project-video" controls muted preload="metadata">
-        <source src="FYSN33 - Applied Computational Physics and Machine Learning/Project 3 - Entropic spring: rediscover Hooke’s law with Monte Carlo/rubberband-visualization.mp4" type="video/mp4">
+        <source
+          src="FYSN33 - Applied Computational Physics and Machine Learning/Project 3 - Entropic spring: rediscover Hooke’s law with Monte Carlo/rubberband-visualization.mp4"
+          type="video/mp4">
         Your browser does not support the video tag.
       </video>
-    </div>
+
+      <div class="project-actions">
+        <a
+          class="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%203%20-%20Entropic%20spring%3A%20rediscover%20Hooke%E2%80%99s%20law%20with%20Monte%20Carlo"
+          href="project-3.html"
+          aria-label="View the full entropic spring project">
+          View Full Project <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </article>
   </main>
 
   <footer>
@@ -197,31 +346,46 @@
   </footer>
 
   <script>
-    const toggleBtn = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      toggleBtn.innerHTML = '☀️ Light Mode';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      toggleBtn.innerHTML = '🌙 Dark Mode';
+    const toggleBtn = document.getElementById("themeToggle");
+    const savedTheme = localStorage.getItem("theme");
+    const systemPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    function applyTheme(theme) {
+      const darkModeEnabled = theme === "dark";
+
+      document.documentElement.setAttribute("data-theme", theme);
+      toggleBtn.textContent = darkModeEnabled
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+
+      toggleBtn.setAttribute(
+        "aria-label",
+        darkModeEnabled
+          ? "Switch to light mode"
+          : "Switch to dark mode"
+      );
+
+      toggleBtn.setAttribute(
+        "aria-pressed",
+        String(darkModeEnabled)
+      );
     }
 
-    toggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      let newTheme = 'light';
-      
-      if (currentTheme === 'light') {
-        newTheme = 'dark';
-        toggleBtn.innerHTML = '☀️ Light Mode';
-      } else {
-        toggleBtn.innerHTML = '🌙 Dark Mode';
-      }
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+    const initialTheme =
+      savedTheme || (systemPrefersDark ? "dark" : "light");
+
+    applyTheme(initialTheme);
+
+    toggleBtn.addEventListener("click", () => {
+      const currentTheme =
+        document.documentElement.getAttribute("data-theme");
+
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      applyTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
     });
   </script>
 </body>
