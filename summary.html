@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>LDMX Geometry Comparison | Ricardo Fernandes</title>
 
   <style>
-    /* CSS Variables for Light Mode */
     :root {
       --bg-color: #f8f9fa;
       --text-color: #212529;
@@ -17,7 +17,6 @@
       --muted-text: #6c757d;
     }
 
-    /* CSS Variables for Dark Mode */
     [data-theme="dark"] {
       --bg-color: #121212;
       --text-color: #e0e0e0;
@@ -29,17 +28,17 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
       line-height: 1.7;
       background-color: var(--bg-color);
       color: var(--text-color);
-      max-width: 1000px; /* Slightly wider layout to accommodate the side-by-side view smoothly */
+      max-width: 1000px;
       margin: 0 auto;
       padding: 40px 20px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Fixed Toggle Switch matching index.html */
     .theme-toggle-btn {
       position: fixed;
       top: 20px;
@@ -52,8 +51,11 @@
       cursor: pointer;
       font-size: 0.85rem;
       font-weight: 500;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: background 0.2s, border 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s;
       z-index: 1000;
     }
 
@@ -71,7 +73,13 @@
 
     h1 {
       font-size: 2.2rem;
-      margin: 0 0 10px 0;
+      margin: 0 0 10px;
+      color: var(--heading-color);
+    }
+
+    h2,
+    h3,
+    h4 {
       color: var(--heading-color);
     }
 
@@ -87,11 +95,27 @@
       border-radius: 8px;
       padding: 24px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-      transition: background-color 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
     }
 
-    /* Comparison Grid Layout updated to stack cleanly in 2x2 rows */
+    .project-card h2,
+    .project-card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .abstract-card {
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .abstract-card p {
+      margin-bottom: 0;
+      text-align: justify;
+    }
+
     .comparison-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -102,17 +126,17 @@
     .geometry-column h4 {
       margin-top: 0;
       margin-bottom: 10px;
-      color: var(--heading-color);
       font-size: 1.1rem;
     }
 
-    /* Embedded iframe dimensions */
     .plot-iframe {
+      display: block;
       width: 100%;
       height: 450px;
+      box-sizing: border-box;
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      background-color: #000;
+      background-color: #000000;
     }
 
     a {
@@ -124,22 +148,40 @@
       text-decoration: underline;
     }
 
-    /* Drop to single column stack on smaller monitors or mobile devices */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--accent-color);
+      outline-offset: 3px;
+    }
+
     @media (max-width: 768px) {
       .comparison-grid {
         grid-template-columns: 1fr;
         gap: 25px;
       }
+
       .plot-iframe {
         height: 380px;
       }
     }
 
     @media (max-width: 480px) {
+      body {
+        padding-top: 25px;
+      }
+
       .theme-toggle-btn {
         position: static;
-        margin: 0 auto 20px auto;
         display: block;
+        margin: 0 0 20px auto;
+      }
+
+      .project-card {
+        padding: 20px;
+      }
+
+      .abstract-card p {
+        text-align: left;
       }
     }
 
@@ -151,100 +193,149 @@
     }
   </style>
 </head>
-<body>
 
-  <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+<body>
+  <button
+    class="theme-toggle-btn"
+    id="themeToggle"
+    type="button"
+    aria-label="Switch to dark mode"
+    aria-pressed="false">
+    🌙 Dark Mode
+  </button>
 
   <header>
     <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+
     <h1>LDMX Detector Geometry</h1>
-    <p class="subtitle">Structural Design Comparison: Baseline vs. Proposed Configurations (work in progress)</p>
+
+    <p class="subtitle">
+      Structural Design Comparison: Baseline vs. Proposed Configurations
+      (work in progress)
+    </p>
   </header>
 
   <main>
-    <div class="project-card">
-      <h3>Interactive 3D Geometry Comparison</h3>
+    <!-- Abstract section -->
+    <section class="project-card abstract-card" aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+
       <p>
-        Compare the original orientation framework with the optimized structure configurations side-by-side from both isometric and side profiles. 
-        Use your mouse directly inside any viewport to interact: <strong>Left-click & drag</strong> to rotate, <strong>right-click & drag</strong> to zoom, and <strong>middle-click</strong> to pan.
+         The Light Dark Matter eXperiment (LDMX) is an electron beam fixed-target experiment designed to probe dark matter candidates with masses below the GeV scale, which remains largely unexplored. The trigger scintillator is the detector subsystem mainly responsible for estimating the number of electrons per bunch in the beamline. The current geometry cannot distinguish electrons nearly aligned along the horizontal axis due to its bar configuration. The new geometry proposal intends to fix this by using a new set of vertical bars. Using the LDMX software simulation environment, a comparison of the electron counting and resolution along the horizontal and vertical axes was made. The new geometry improves the resolution along the horizontal axis while only slightly reducing the precision along the vertical axis. The electron counting was similar for the 1 electron/event case, but it led to considerably worse results for the 2 electron case. However, with further improvements to the algorithm, there is the potential to achieve similar results. 
+
       </p>
-      
+    </section>
+
+    <!-- Geometry comparison section -->
+    <section class="project-card" aria-labelledby="geometry-title">
+      <h2 id="geometry-title">Interactive 3D Geometry Comparison</h2>
+
+      <p>
+        Compare the original orientation framework with the optimized structure
+        configurations side-by-side from both isometric and side profiles.
+        Use your mouse directly inside any viewport to interact:
+        <strong>left-click and drag</strong> to rotate,
+        <strong>right-click and drag</strong> to zoom, and
+        <strong>middle-click</strong> to pan.
+      </p>
+
       <div class="comparison-grid">
-        <!-- ROW 1: Isometric Views -->
-        <!-- Old/Baseline Geometry Viewport -->
         <div class="geometry-column">
-          <h4>Baseline Configuration (3D View)</h4>
-          <iframe 
-            src="Geometries/bas_geo.html" 
-            class="plot-iframe" 
-            title="LDMX Baseline Geometry 3D Plot">
+          <h3>Baseline Configuration (3D View)</h3>
+
+          <iframe
+            src="Geometries/bas_geo.html"
+            class="plot-iframe"
+            title="LDMX baseline geometry 3D plot"
+            loading="lazy">
           </iframe>
         </div>
 
-        <!-- New/Alternative Geometry Viewport -->
         <div class="geometry-column">
-          <h4>Alternative Layout (3D View)</h4>
-          <iframe 
-            src="Geometries/new_geo.html" 
-            class="plot-iframe" 
-            title="LDMX Alternative Geometry 3D Plot">
+          <h3>Alternative Layout (3D View)</h3>
+
+          <iframe
+            src="Geometries/new_geo.html"
+            class="plot-iframe"
+            title="LDMX alternative geometry 3D plot"
+            loading="lazy">
           </iframe>
         </div>
 
-        <!-- ROW 2: Side Profile Views -->
-        <!-- Old/Baseline Geometry Side Viewport -->
         <div class="geometry-column">
-          <h4>Baseline Configuration (Side View)</h4>
-          <iframe 
-            src="Geometries/bas_geo_side.html" 
-            class="plot-iframe" 
-            title="LDMX Baseline Geometry Side Plot">
+          <h3>Baseline Configuration (Side View)</h3>
+
+          <iframe
+            src="Geometries/bas_geo_side.html"
+            class="plot-iframe"
+            title="LDMX baseline geometry side plot"
+            loading="lazy">
           </iframe>
         </div>
 
-        <!-- New/Alternative Geometry Side Viewport -->
         <div class="geometry-column">
-          <h4>Alternative Layout (Side View)</h4>
-          <iframe 
-            src="Geometries/new_geo_side.html" 
-            class="plot-iframe" 
-            title="LDMX Alternative Geometry Side Plot">
+          <h3>Alternative Layout (Side View)</h3>
+
+          <iframe
+            src="Geometries/new_geo_side.html"
+            class="plot-iframe"
+            title="LDMX alternative geometry side plot"
+            loading="lazy">
           </iframe>
         </div>
       </div>
-    </div>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 Ricardo Fernandes. High-Energy Physics Simulations.</p>
+    <p>
+      &copy; 2026 Ricardo Fernandes. High-Energy Physics Simulations.
+    </p>
   </footer>
 
   <script>
-    const toggleBtn = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      toggleBtn.innerHTML = '☀️ Light Mode';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      toggleBtn.innerHTML = '🌙 Dark Mode';
+    const toggleBtn = document.getElementById("themeToggle");
+    const savedTheme = localStorage.getItem("theme");
+    const systemPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    function applyTheme(theme) {
+      const darkModeEnabled = theme === "dark";
+
+      document.documentElement.setAttribute("data-theme", theme);
+
+      toggleBtn.textContent = darkModeEnabled
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+
+      toggleBtn.setAttribute(
+        "aria-label",
+        darkModeEnabled
+          ? "Switch to light mode"
+          : "Switch to dark mode"
+      );
+
+      toggleBtn.setAttribute(
+        "aria-pressed",
+        String(darkModeEnabled)
+      );
     }
 
-    toggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      let newTheme = 'light';
-      
-      if (currentTheme === 'light') {
-        newTheme = 'dark';
-        toggleBtn.innerHTML = '☀️ Light Mode';
-      } else {
-        toggleBtn.innerHTML = '🌙 Dark Mode';
-      }
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+    const initialTheme =
+      savedTheme || (systemPrefersDark ? "dark" : "light");
+
+    applyTheme(initialTheme);
+
+    toggleBtn.addEventListener("click", () => {
+      const currentTheme =
+        document.documentElement.getAttribute("data-theme");
+
+      const newTheme =
+        currentTheme === "dark" ? "light" : "dark";
+
+      applyTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
     });
   </script>
 </body>
