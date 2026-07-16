@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,6 @@
   </script>
 
   <style>
-    /* CSS Variables for Light Mode */
     :root {
       --bg-color: #f8f9fa;
       --text-color: #212529;
@@ -38,7 +38,6 @@
       --muted-text: #6c757d;
     }
 
-    /* CSS Variables for Dark Mode */
     [data-theme="dark"] {
       --bg-color: #121212;
       --text-color: #e0e0e0;
@@ -253,6 +252,7 @@
   </header>
 
   <main>
+    <!-- Project 1 -->
     <article class="project-card">
       <span class="project-num">Project 1</span>
 
@@ -273,21 +273,20 @@
 
       <div class="project-actions">
         <a
-          class="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%201%20-%20Differential-equations-in-astrophysics"
-          href="project-1.html"
-          aria-label="View the full Sod Shock Tube project">
-          View Full Project <span aria-hidden="true">&rarr;</span>
+          class="project-link"
+          href="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%201%20-%20Differential-equations-in-astrophysics"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View the full Sod Shock Tube project on GitHub">
+          View Full Project <span aria-hidden="true">↗</span>
         </a>
       </div>
     </article>
 
+    <!-- Project 2 -->
     <article class="project-card">
       <span class="project-num">Project 2</span>
 
-      <!--
-        Using \( ... \) instead of dollar signs avoids conflicts with other
-        scripts and ensures MathJax identifies this as inline mathematics.
-      -->
       <h2>
         Neural-Network Tagger for Hadronic
         \(V \rightarrow q\bar{q}\) Jets
@@ -301,14 +300,17 @@
 
       <div class="project-actions">
         <a
-          class="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%202%20-%20Neural-network-tagger-clean"
-          href="project-2.html"
-          aria-label="View the full neural-network jet tagger project">
-          View Full Project <span aria-hidden="true">&rarr;</span>
+          class="project-link"
+          href="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%202%20-%20Neural-network-tagger-clean"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View the full neural-network jet tagger project on GitHub">
+          View Full Project <span aria-hidden="true">↗</span>
         </a>
       </div>
     </article>
 
+    <!-- Project 3 -->
     <article class="project-card">
       <span class="project-num">Project 3</span>
 
@@ -332,10 +334,12 @@
 
       <div class="project-actions">
         <a
-          class="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%203%20-%20Entropic%20spring%3A%20rediscover%20Hooke%E2%80%99s%20law%20with%20Monte%20Carlo"
-          href="project-3.html"
-          aria-label="View the full entropic spring project">
-          View Full Project <span aria-hidden="true">&rarr;</span>
+          class="project-link"
+          href="https://github.com/ri5800fe-s/ri5800fe-s.github.io/tree/main/FYSN33%20-%20Applied%20Computational%20Physics%20and%20Machine%20Learning/Project%203%20-%20Entropic%20spring%3A%20rediscover%20Hooke%E2%80%99s%20law%20with%20Monte%20Carlo"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View the full entropic spring project on GitHub">
+          View Full Project <span aria-hidden="true">↗</span>
         </a>
       </div>
     </article>
@@ -356,6 +360,7 @@
       const darkModeEnabled = theme === "dark";
 
       document.documentElement.setAttribute("data-theme", theme);
+
       toggleBtn.textContent = darkModeEnabled
         ? "☀️ Light Mode"
         : "🌙 Dark Mode";
@@ -382,7 +387,8 @@
       const currentTheme =
         document.documentElement.getAttribute("data-theme");
 
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      const newTheme =
+        currentTheme === "dark" ? "light" : "dark";
 
       applyTheme(newTheme);
       localStorage.setItem("theme", newTheme);
@@ -390,3 +396,5 @@
   </script>
 </body>
 </html>
+```
+
